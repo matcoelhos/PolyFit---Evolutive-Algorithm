@@ -27,8 +27,8 @@ string PolyFit::disp()
 		cout << solSpace[i] << " ";
         ss << solSpace[i] << " ";
 	}
-    return ss.str();
 	cout << endl;
+	return ss.str();
 }
 
 void PolyFit::getFitness(PolyFitP P)
