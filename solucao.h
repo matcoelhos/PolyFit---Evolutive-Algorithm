@@ -36,9 +36,7 @@ public:
 	
 	//display solution
     string disp();
-
-    // Functions needed by the Genetic Algorithm
-    
+	
     /// Functions
     // Evaluates the solution and return the objective value
     // criteria: Integral square error.
@@ -48,8 +46,6 @@ public:
 private:    
     ///size of each solution;
     int nsize;
-
-    ///Functions
 };
 
 #endif /* defined(__Matrizes__PolyFit__) */
