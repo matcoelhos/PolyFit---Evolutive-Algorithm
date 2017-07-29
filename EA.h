@@ -34,10 +34,17 @@ public:
 	///Functions
 	//runs EA for a number of iterations or a criteria
 	int runEA(PolyFitP problem, int rounds = 10000);
+    //runs GA for a number of iterations or a criteria
+	int runGA(PolyFitP problem, int rounds = 10000, int percentage = 10, bool compete = true, bool elitism = false);
+    
 	//display population
 	void disp();
+    //crossover function
+	PolyFit crossover(int pos1, int pos2);
 	//mutation function
 	void mutation(PolyFit * s, double sigma);
+    //Auto evolution mutation
+    void EVmutation(PolyFit * s, double sigma);
 
 	//standard deviation for stop point
 	double stdev();
@@ -55,8 +62,10 @@ private:
 	//sorts population according to fitness
 	void fitSort();
 	//reproduces than selects with tournament
-	void reproduceAndSweep(PolyFitP prob, int round);
-
+	void reproduceAndSweep(int percent, PolyFitP prob, bool compete, bool elitism);
+    //Auto evolve
+    void autoEvolve(PolyFitP prob, int round);
+    
 };
 
 #endif

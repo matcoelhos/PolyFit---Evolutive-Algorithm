@@ -1,6 +1,6 @@
 CC = g++
-FILES = main.cpp EA.cpp GA.cpp solucao.cpp problema.cpp
-OPTIONS = -std=c++11
+FILES = main.cpp EA.cpp solucao.cpp problema.cpp
+OPTIONS = -std=c++11 -ofast
 
 #main section
 main: $(FILES)

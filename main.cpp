@@ -5,13 +5,12 @@
 #include <chrono>
 #include <random>
 #include "problema.h"
-#include "GA.h"
 #include "EA.h"
 
 using namespace std;
 
 int popsize = 50;
-int gensize = 4;
+int gensize = 5;
 int rounds = 100000;
 int percent = 100;
 bool elitism = false;
@@ -82,7 +81,7 @@ void testGAFunct ()
     PolyFitP p(fileslist[i]);
     cout << "File: " << fileslist[i] << endl;
 
-    GA algorithm(p, popsize, gensize);
+    EA algorithm(p, popsize, gensize);
     R = algorithm.runGA(p, rounds, percent, true, elitism);
 
     cout << "mean fitness: " << algorithm.getMean() << ", best: " << algorithm.population[algorithm.getBest()].fitness << endl;
@@ -96,5 +95,6 @@ void testGAFunct ()
 int main(int argc, char* argv[])
 {
     testGAFunct();
+    testEAFunct();
     return 0;
 }
