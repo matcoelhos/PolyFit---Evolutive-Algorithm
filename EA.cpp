@@ -28,8 +28,8 @@ void EA::EVmutation(PolyFit * s, double sigma)
 {
 	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
     	static default_random_engine gen(seed);
-	normal_distribution<double> dist(0.0,1.0);	
-	
+	normal_distribution<double> dist(0.0,1.0);
+
 	for (int i = 0; i < gsize; i++)
 	{
 		s->solSpace[i] += sigma*dist(gen);
@@ -132,6 +132,7 @@ int EA::runGA(PolyFitP problem, int rounds, int percentage, bool compete, bool e
 	while (i < rounds && stdev() > 0.005)
 	{
 		reproduceAndSweep(percentage, problem, compete, elitism);
+		for (int i = 0; i < 10; i++) autoEvolve(problem, i);
 		i++;
 		posbest = getBest();
 		mean = getMean();
@@ -175,7 +176,7 @@ void EA::reproduceAndSweep(int percent, PolyFitP prob, bool compete, bool elitis
 	int numberOfSons = (size*percent)/100;
 	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
     static default_random_engine gen(seed);
-	
+
 	for (int i = 0; i < numberOfSons; i++)
 	{
 		PolyFit s(gsize);
@@ -183,7 +184,7 @@ void EA::reproduceAndSweep(int percent, PolyFitP prob, bool compete, bool elitis
 		uniform_int_distribution<int> eld(0,2*size/3);
 		int p1 = distribution(gen);
 		int p2;
-		
+
 		if (elitism) p2 = eld(gen);
 		else p2 = distribution(gen);
 

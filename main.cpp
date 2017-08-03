@@ -9,10 +9,10 @@
 
 using namespace std;
 
-int popsize = 50;
-int gensize = 5;
-int rounds = 100000;
-int percent = 100;
+int popsize = 20;
+int gensize = 4;
+int rounds = 1000000;
+int percent = 400;
 bool elitism = false;
 
 void testEAFunct ()
@@ -94,7 +94,7 @@ void testGAFunct ()
 
 int main(int argc, char* argv[])
 {
-    testGAFunct();
+    //testGAFunct();
     testEAFunct();
     return 0;
 }
