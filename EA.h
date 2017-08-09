@@ -35,7 +35,7 @@ public:
 	//runs EA for a number of iterations or a criteria
 	int runEA(PolyFitP problem, int rounds = 10000);
     //runs GA for a number of iterations or a criteria
-	int runGA(PolyFitP problem, int rounds = 10000, int percentage = 10, bool compete = true, bool elitism = false);
+	int runGA(PolyFitP problem, int rounds = 10000, int percentage = 10, bool compete = true, bool elitism = false, bool hybrid = true);
     
 	//display population
 	void disp();

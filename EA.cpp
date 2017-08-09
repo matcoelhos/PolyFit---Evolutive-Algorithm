@@ -28,11 +28,11 @@ void EA::EVmutation(PolyFit * s, double sigma)
 {
 	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
     static default_random_engine gen(seed);
-	normal_distribution<double> dist(0.0,1.0);
+	normal_distribution<double> dist(0.0,sigma);
 
 	for (int i = 0; i < gsize; i++)
 	{
-		s->solSpace[i] += sigma*dist(gen);
+		s->solSpace[i] += dist(gen);
 	}
 }
 
@@ -127,7 +127,7 @@ double EA::stdev()
 	return sqrt(sum);
 }
 
-int EA::runGA(PolyFitP problem, int rounds, int percentage, bool compete, bool elitism)
+int EA::runGA(PolyFitP problem, int rounds, int percentage, bool compete, bool elitism, bool hybrid)
 {
 	int i = 0;
 	int posbest = getBest();
@@ -136,8 +136,11 @@ int EA::runGA(PolyFitP problem, int rounds, int percentage, bool compete, bool e
 	while (i < rounds && stdev() > 0.1)
 	{
 		reproduceAndSweep(percentage, problem, compete, elitism);
-		for (int i = 0; i < 10; i++) autoEvolve(problem, i);
-		i++;
+		if (hybrid)
+        {
+            for (int i = 0; i < 10; i++) autoEvolve(problem, i);
+        }
+        i++;
 		posbest = getBest();
 		mean = getMean();
 		cout << "Round: " << i << " Mean: " << mean << " Best: " << population[posbest].fitness << " St. Dev.: " << stdev() << "            \r";
