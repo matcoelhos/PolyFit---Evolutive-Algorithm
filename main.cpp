@@ -9,8 +9,7 @@
 
 using namespace std;
 
-
-int popsize = 50;
+int popsize = 100;
 int gensize = 5;
 int rounds = 10000000;
 int percent = 400;
@@ -134,7 +133,7 @@ void testHBDFunct ()
 int main(int argc, char* argv[])
 {
     testGAFunct();
-    testEAFunct();
+    //testEAFunct();
     testHBDFunct();
     return 0;
 }

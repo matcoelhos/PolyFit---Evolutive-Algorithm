@@ -53,12 +53,12 @@ void EA::autoEvolve(PolyFitP prob, int round)
 		PolyFit s(gsize);
 		int p1 = i;
 		s = population[p1];
-        
+
         int seed = std::chrono::system_clock::now().time_since_epoch().count();
         static default_random_engine gen(seed);
         normal_distribution<double> dist(0.0,1.0);
 		double sigma = 0.5*dist(gen);
-		
+
         EVmutation(&s, sigma);
 		s.getFitness(prob);
 
@@ -133,7 +133,7 @@ int EA::runGA(PolyFitP problem, int rounds, int percentage, bool compete, bool e
 	int posbest = getBest();
 	double mean = getMean();
 
-	while (i < rounds && stdev() > 0.1)
+	while (i < rounds && stdev() > 0.01)
 	{
 		reproduceAndSweep(percentage, problem, compete, elitism);
 		if (hybrid)
