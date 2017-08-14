@@ -10,7 +10,7 @@
 using namespace std;
 
 int popsize = 100;
-int gensize = 5;
+int gensize = 4;
 int rounds = 10000000;
 int percent = 400;
 bool elitism = false;
@@ -25,7 +25,7 @@ void testEAFunct ()
   readlist.open("files.txt");
 
   stringstream ss;
-  ss << "EA_tests_" << popsize << "_" << gensize << "_" << rounds << "_" << percent << "_" << elitism << ".txt";
+  ss << "EA_test_" << popsize << "_" << gensize << "_" << rounds << "_" << percent << "_" << elitism << ".txt";
   resultList.open(ss.str());
 
   while (getline(readlist,line))
@@ -36,7 +36,9 @@ void testEAFunct ()
   }
 
   readlist.close();
-
+  ofstream results;
+  results.open("EAresults.txt");
+  
   for (int i = 0; i < fileslist.size(); i++)
   {
     int R;
@@ -47,10 +49,13 @@ void testEAFunct ()
     R = algorithm.runEA(p, rounds);
 
     cout << "mean fitness: " << algorithm.getMean() << ", best: " << algorithm.population[algorithm.getBest()].fitness << endl;
-        resultList << "Rounds:" << R << ", mean fitness: " << algorithm.getMean() << ", best: " << algorithm.population[algorithm.getBest()].fitness << ", St. Dev.: " << algorithm.stdev() << endl;
-    resultList << algorithm.population[algorithm.getBest()].disp() << endl;
+    
+    resultList << fileslist[i] << "\t" << R << "\t" << algorithm.getMean() << "\t" << algorithm.population[algorithm.getBest()].fitness << "\t" << algorithm.stdev() << endl;
+    
+    results << fileslist[i] << "\t" << algorithm.population[algorithm.getBest()].disp() << endl;
     cout << endl << endl;
   }
+  results.close();
   resultList.close();
 }
 
@@ -63,7 +68,7 @@ void testGAFunct ()
 
   readlist.open("files.txt");
   stringstream ss;
-  ss << "GA_tests_" << popsize << "_" << gensize << "_" << rounds << "_" << percent << "_" << elitism << ".txt";
+  ss << "GA_test_" << popsize << "_" << gensize << "_" << rounds << "_" << percent << "_" << elitism << ".txt";
   resultList.open(ss.str());
 
   while (getline(readlist,line))
@@ -74,7 +79,8 @@ void testGAFunct ()
   }
 
   readlist.close();
-
+  ofstream results;
+  results.open("GAresults.txt");
   for (int i = 0; i < fileslist.size(); i++)
   {
     int R;
@@ -85,10 +91,13 @@ void testGAFunct ()
     R = algorithm.runGA(p, rounds, percent, true, elitism, false);
 
     cout << "mean fitness: " << algorithm.getMean() << ", best: " << algorithm.population[algorithm.getBest()].fitness << endl;
-        resultList << "Rounds:" << R << ", mean fitness: " << algorithm.getMean() << ", best: " << algorithm.population[algorithm.getBest()].fitness << ", St. Dev.: " << algorithm.stdev() << endl;
-    resultList << algorithm.population[algorithm.getBest()].disp() << endl;
+    
+    resultList << fileslist[i] << "\t" << R << "\t" << algorithm.getMean() << "\t" << algorithm.population[algorithm.getBest()].fitness << "\t" << algorithm.stdev() << endl;
+    
+    results << fileslist[i] << "\t" << algorithm.population[algorithm.getBest()].disp() << endl;
     cout << endl << endl;
   }
+  results.close();
   resultList.close();
 }
 
@@ -101,7 +110,7 @@ void testHBDFunct ()
 
   readlist.open("files.txt");
   stringstream ss;
-  ss << "HBD_tests_" << popsize << "_" << gensize << "_" << rounds << "_" << percent << "_" << elitism << ".txt";
+  ss << "HBD_test_" << popsize << "_" << gensize << "_" << rounds << "_" << percent << "_" << elitism << ".txt";
   resultList.open(ss.str());
 
   while (getline(readlist,line))
@@ -112,7 +121,9 @@ void testHBDFunct ()
   }
 
   readlist.close();
-
+  ofstream results;
+  results.open("HBDresults.txt");
+    
   for (int i = 0; i < fileslist.size(); i++)
   {
     int R;
@@ -123,17 +134,20 @@ void testHBDFunct ()
     R = algorithm.runGA(p, rounds, percent, true, elitism, true);
 
     cout << "mean fitness: " << algorithm.getMean() << ", best: " << algorithm.population[algorithm.getBest()].fitness << endl;
-        resultList << "Rounds:" << R << ", mean fitness: " << algorithm.getMean() << ", best: " << algorithm.population[algorithm.getBest()].fitness << ", St. Dev.: " << algorithm.stdev() << endl;
-    resultList << algorithm.population[algorithm.getBest()].disp() << endl;
+    
+    resultList << fileslist[i] << "\t" << R << "\t" << algorithm.getMean() << "\t" << algorithm.population[algorithm.getBest()].fitness << "\t" << algorithm.stdev() << endl;
+    
+    results << fileslist[i] << "\t" << algorithm.population[algorithm.getBest()].disp() << endl;
     cout << endl << endl;
   }
+  results.close();
   resultList.close();
 }
 
 int main(int argc, char* argv[])
 {
     testGAFunct();
-    //testEAFunct();
+    testEAFunct();
     testHBDFunct();
     return 0;
 }
