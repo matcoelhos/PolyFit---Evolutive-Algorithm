@@ -1,7 +1,7 @@
 library("pracma")
 setwd("~/Documents/GitHub/PolyFit---Evolutive-Algorithm")
 
-list <- read.table("GAresults.txt")
+list <- read.table("HBDresults.txt")
 for (i in 1:nrow(list))
 {
   l <- read.table(toString(list$V1[i]), nrows = 1)
@@ -14,8 +14,12 @@ for (i in 1:nrow(list))
   {
     y <- y + (x^(ncol(l)-j))*l[,j]
   }
-  yl <- x^3*list$V2[i] + x^2*list$V3[i] + x*list$V4[i] + list$V5[i]
   
+  yl <- (x^0)*list[i,ncol(list)]
+  for (j in (ncol(list)-1):2)
+  {
+    yl <- yl + (x^(ncol(list)-j))*list[i,j]
+  }
   
   plot(t[-1,2],t[-1,3], xlim = c(-10,10), ylim = c(min(y)-1, max(y)+1), xlab = "", ylab = "")
   par(new = TRUE)
