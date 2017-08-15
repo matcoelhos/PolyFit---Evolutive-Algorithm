@@ -11,7 +11,7 @@ using namespace std;
 
 int popsize = 100;
 int gensize = 4;
-int rounds = 10000000;
+int rounds = 1000000;
 int percent = 400;
 bool elitism = false;
 
