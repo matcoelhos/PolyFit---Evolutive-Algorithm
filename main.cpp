@@ -9,8 +9,8 @@
 
 using namespace std;
 
-int popsize = 100;
-int gensize = 4;
+int popsize = 200;
+int gensize = 5;
 int rounds = 1000000;
 int percent = 400;
 bool elitism = false;
@@ -38,7 +38,7 @@ void testEAFunct ()
   readlist.close();
   ofstream results;
   results.open("EAresults.txt");
-  
+
   for (int i = 0; i < fileslist.size(); i++)
   {
     int R;
@@ -49,9 +49,9 @@ void testEAFunct ()
     R = algorithm.runEA(p, rounds);
 
     cout << "mean fitness: " << algorithm.getMean() << ", best: " << algorithm.population[algorithm.getBest()].fitness << endl;
-    
+
     resultList << fileslist[i] << "\t" << R << "\t" << algorithm.getMean() << "\t" << algorithm.population[algorithm.getBest()].fitness << "\t" << algorithm.stdev() << endl;
-    
+
     results << fileslist[i] << "\t" << algorithm.population[algorithm.getBest()].disp() << endl;
     cout << endl << endl;
   }
@@ -91,9 +91,9 @@ void testGAFunct ()
     R = algorithm.runGA(p, rounds, percent, true, elitism, false);
 
     cout << "mean fitness: " << algorithm.getMean() << ", best: " << algorithm.population[algorithm.getBest()].fitness << endl;
-    
+
     resultList << fileslist[i] << "\t" << R << "\t" << algorithm.getMean() << "\t" << algorithm.population[algorithm.getBest()].fitness << "\t" << algorithm.stdev() << endl;
-    
+
     results << fileslist[i] << "\t" << algorithm.population[algorithm.getBest()].disp() << endl;
     cout << endl << endl;
   }
@@ -123,7 +123,7 @@ void testHBDFunct ()
   readlist.close();
   ofstream results;
   results.open("HBDresults.txt");
-    
+
   for (int i = 0; i < fileslist.size(); i++)
   {
     int R;
@@ -134,9 +134,9 @@ void testHBDFunct ()
     R = algorithm.runGA(p, rounds, percent, true, elitism, true);
 
     cout << "mean fitness: " << algorithm.getMean() << ", best: " << algorithm.population[algorithm.getBest()].fitness << endl;
-    
+
     resultList << fileslist[i] << "\t" << R << "\t" << algorithm.getMean() << "\t" << algorithm.population[algorithm.getBest()].fitness << "\t" << algorithm.stdev() << endl;
-    
+
     results << fileslist[i] << "\t" << algorithm.population[algorithm.getBest()].disp() << endl;
     cout << endl << endl;
   }
